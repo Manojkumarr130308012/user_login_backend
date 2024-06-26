@@ -4,12 +4,13 @@ const bodyParser=require('body-parser');
 const config=require("./../config/config.json");
 const mongoose = require('mongoose');
 const {verifyTokenAndAuthorization} =  require('../middleware/verifyToken');
-
+const uploadStorage = require("../utils/file_upload")
 
 require('dotenv').config();
 
 server.use(bodyParser.json());
 const cors = require('cors');
+
 server.use(cors({ origin: 'http://192.168.1.131:3000' }))
 
 server.use(
@@ -27,7 +28,6 @@ server.use(
       credentials: true,
     })
   );
-
 
 const authRouter = require('./../router/auth');
 const userRouter = require('./../router/user');
@@ -47,5 +47,18 @@ mongoose.connect(db)
   
 server.use("/api/auth", authRouter);
 server.use("/user",verifyTokenAndAuthorization, userRouter);
+
+
+  // Single file
+  server.post("/upload/single", uploadStorage.single("file"), (req, res) => {
+    console.log(req.file.path)
+    return res.json({ path: ''+req.file.path });
+  })
+  //Multiple files
+  server.post("/upload/multiple", uploadStorage.array("file", 10), (req, res) => {
+    console.log(req.files)
+    return res.send("Multiple files")
+  })
+  
 
 module.exports= server;
