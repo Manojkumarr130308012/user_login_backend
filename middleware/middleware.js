@@ -13,21 +13,21 @@ const cors = require('cors');
 server.use(cors({ origin: 'http://192.168.1.131:3000' }))
 
 
-// server.use(
-//     cors({
-//       origin: true,
-//       optionsSuccessStatus: 200,
-//       credentials: true,
-//     })
-//   );
-//   server.options(
-//     '*',
-//     cors({
-//       origin: true,
-//       optionsSuccessStatus: 200,
-//       credentials: true,
-//     })
-//   );
+server.use(
+    cors({
+      origin: true,
+      optionsSuccessStatus: 200,
+      credentials: true,
+    })
+  );
+  server.options(
+    '*',
+    cors({
+      origin: true,
+      optionsSuccessStatus: 200,
+      credentials: true,
+    })
+  );
 
 
 const authRouter = require('./../router/auth');
