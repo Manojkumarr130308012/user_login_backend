@@ -12,7 +12,6 @@ server.use(bodyParser.json());
 const cors = require('cors');
 server.use(cors({ origin: 'http://192.168.1.131:3000' }))
 
-
 server.use(
     cors({
       origin: true,
