@@ -1,0 +1,13 @@
+{
+	"app": {
+		"port":3000,
+		"db": {
+			"protocal": "mongodb+srv",
+			"host": "cluster0.vosswk8.mongodb.net",
+			"port": "",
+			"name": "",
+			"username":"admin",
+			"password":"1234"
+		}
+	}
+}
