@@ -7,8 +7,8 @@ router.post('/register', async (req, res) => {
     res.send(await userController.register(req.body));
 });
 
-router.post('/register', async (req, res) => {
-    sendEmail("manojkumarr21@gmail.com","test");
+router.post('/sendmain', async (req, res) => {
+    sendEmail(req.body.mail,req.body.message);
 });
 
 router.post('/login', async (req, res) => {
