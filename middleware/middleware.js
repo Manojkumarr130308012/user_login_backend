@@ -7,10 +7,10 @@ const {verifyTokenAndAuthorization} =  require('../middleware/verifyToken');
 const uploadStorage = require("../utils/file_upload")
 
 require('dotenv').config();
-
 server.use(bodyParser.json());
-const cors = require('cors');
 
+//cors
+const cors = require('cors');
 server.use(cors({ origin: 'http://192.168.1.131:3000' }))
 
 server.use(
@@ -29,8 +29,8 @@ server.use(
     })
   );
 
-const authRouter = require('./../router/auth');
-const userRouter = require('./../router/user');
+
+// db connection
 
 let { protocal, host, port, name,username,password } = config.app.db;
 
@@ -44,7 +44,13 @@ mongoose.connect(db)
   console.error('Error connecting to MongoDB Atlas:', error);
 });
 
+
+//router intialization
+const authRouter = require('./../router/auth');
+const userRouter = require('./../router/user');
+
   
+
 server.use("/api/auth", authRouter);
 server.use("/user",verifyTokenAndAuthorization, userRouter);
 
