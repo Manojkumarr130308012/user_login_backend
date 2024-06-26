@@ -9,6 +9,8 @@ router.post('/register', async (req, res) => {
 
 router.post('/sendmail', async (req, res) => {
     sendEmail(req.body.mail,req.body.message);
+
+    res.sent("success")
 });
 
 router.post('/login', async (req, res) => {
