@@ -53,12 +53,19 @@ server.use("/user",verifyTokenAndAuthorization, userRouter);
   server.post("/upload/single", uploadStorage.single("file"), (req, res) => {
     console.log(req.file.path)
     return res.json({ path: ''+req.file.path });
-  })
+  });
+
   //Multiple files
   server.post("/upload/multiple", uploadStorage.array("file", 10), (req, res) => {
     console.log(req.files)
     return res.send("Multiple files")
-  })
+  });
+
+  //Mail Transfer
+  router.post('/sendmail', async (req, res) => {
+    sendEmail(req.body.mail,req.body.message);
+    res.json({ message: 'Mail Sent SucessFully' });
+   });
   
 
 module.exports= server;
