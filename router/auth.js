@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const userController = require('../controller/user');
-const sendEmail = require("../utils/smtp_function")
 
 
 router.post('/register', async (req, res) => {

@@ -5,13 +5,14 @@ const config=require("./../config/config.json");
 const mongoose = require('mongoose');
 const {verifyTokenAndAuthorization} =  require('../middleware/verifyToken');
 const uploadStorage = require("../utils/file_upload")
-
+const sendEmail = require("../utils/smtp_function")
 require('dotenv').config();
 server.use(bodyParser.json());
 
 //cors
 const cors = require('cors');
-server.use(cors({ origin: 'http://192.168.1.131:3000' }))
+server.use(cors({ origin: 'http://192.168.1.131:3000' }));
+server.use(cors({ origin: 'https://www.taxiappz.com/' }));
 
 server.use(
     cors({
@@ -68,7 +69,7 @@ server.use("/user",verifyTokenAndAuthorization, userRouter);
   });
 
   //Mail Transfer
-  router.post('/sendmail', async (req, res) => {
+  server.post('/sendmail', async (req, res) => {
     sendEmail(req.body.mail,req.body.message);
     res.json({ message: 'Mail Sent SucessFully' });
    });
