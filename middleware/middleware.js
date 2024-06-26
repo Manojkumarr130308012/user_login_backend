@@ -50,8 +50,6 @@ mongoose.connect(db)
 const authRouter = require('./../router/auth');
 const userRouter = require('./../router/user');
 
-  
-
 server.use("/api/auth", authRouter);
 server.use("/user",verifyTokenAndAuthorization, userRouter);
 
