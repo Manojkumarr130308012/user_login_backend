@@ -6,7 +6,7 @@ router.post('/add', async (req, res) => {
 });
 
 router.get('/users', async (req, res) => {
-    res.send(await userController.fetch(req.body));
+    res.send(await userController.fetch());
 });
 
 router.get('/fetchlusers', async (req, res) => {

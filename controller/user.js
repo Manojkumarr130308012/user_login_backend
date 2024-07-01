@@ -158,7 +158,7 @@ class UserController {
 		}
 	}
 	
-	async fetch(body){
+	async fetch(){
 		try{
 			let response = await userSchema.find({});
 			let count=Object.keys(response).length;
