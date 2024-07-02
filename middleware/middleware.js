@@ -11,6 +11,7 @@ const { sendAndroidNotification, sendiOSNotification } = require('../utils/push_
 const { fetchDistanceMatrix } = require('../utils/distance-matrix');
 const { generateRequestNumber } = require('../utils/request_number');
 const s3UploadStorage = require("../utils/s3_file_upload");
+const mqtt  = require("../utils/mqtt");
 // const {queryGeoLocation,queryGetDriversNotUpdated,queryGetDriversLogout,queryGetDrivers} = require('./../utils/geofire')
 // const Redis = require("ioredis");
 // const socketIo = require('socket.io');
@@ -60,6 +61,7 @@ mongoose.connect(db)
 //router intialization
 const authRouter = require('./../router/auth');
 const userRouter = require('./../router/user');
+const client = require("../utils/mqtt");
 
 server.use("/api/auth", authRouter);
 server.use("/user",verifyTokenAndAuthorization, userRouter);
@@ -164,6 +166,12 @@ server.post('s3/upload', s3UploadStorage.single('file'), async (req, res) => {
   res.json({ RequestNumber: Number });
 });
 
+server.get('/mqtt/test', async (req, res) => {
+
+  client.publish('testing', 'Hello MQTT');
+
+  res.json({ message:"Data Inserted" });
+});
 // const socketserver = http.createServer(server);
 // const io = socketIo(socketserver);
 
